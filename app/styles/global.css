@@ -1,0 +1,230 @@
+/*
+    Josh's Custom CSS Reset
+    https://www.joshwcomeau.com/css/global-styles/
+  */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  line-height: 1.5;
+  line-height: calc(1em + 0.625rem);
+  -webkit-font-smoothing: antialiased;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+ul {
+  padding: 0;
+}
+
+body {
+  background-color: #f7f5ff;
+  font-family: "Poppins", sans-serif;
+  color: #2c2c51;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  height: 60px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 0.5rem;
+}
+
+.main {
+  min-height: calc(100% - 60px);
+  display: flex;
+  flex-direction: row;
+}
+
+.blue-border {
+  border: 1px solid slateblue;
+}
+
+.btn {
+  border: 1px solid #aaa;
+  background-color: #eee;
+  padding: 0.8rem;
+  min-width: 8rem;
+  color: rgb(2, 28, 53);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 250ms ease, color 250ms ease;
+}
+
+.btn:hover {
+  background-color: #aaa;
+  color: #eee;
+}
+
+input[type="range"] {
+  cursor: pointer;
+}
+
+.radio-card {
+  height: 150px;
+  width: 200px;
+  position: relative;
+}
+
+.radio-card input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  position: absolute;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid rgba(2, 28, 53, 0.08);
+  transition: box-shadow 250ms ease;
+}
+
+/* uncomment to see radio input */
+/* .radio-card input[type="radio"]:before {
+  content: "";
+  position: absolute;
+  height: 22px;
+  width: 22px;
+  background-color: #f9fafd;
+  border: 1px solid #e2e6f3;
+  border-radius: 50%;
+  top: 35px;
+  right: 20px;
+} */
+
+/* .radio-card input[type="radio"]:after {
+  content: "";
+  position: absolute;
+  height: 13px;
+  width: 13px;
+  background-color: transparent;
+  border-radius: 50%;
+  top: 39.5px;
+  right: 24.5px;
+} */
+
+.radio-card label {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.radio-card label h5 {
+  font-weight: 600;
+  font-size: 24px;
+  letter-spacing: 0.5px;
+}
+
+.radio-card input[type="radio"]:hover {
+  box-shadow: 7px 7px 15px rgba(2, 28, 53, 0.08);
+}
+
+.radio-card input[type="radio"]:checked {
+  border: 3px solid #478bfb;
+}
+
+/* uncomment to see radio input */
+/* .radio-card input[type="radio"]:checked:after {
+  background-color: #478bfb;
+} */
+
+.bmi-form-container {
+  width: auto;
+}
+
+.bmi-form-container .fieldset {
+  border: unset;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.bmi-form-container .fieldset .legend {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.bmi-form-container input[type="range"] {
+  width: 100%;
+}
+
+.bmi-form-container .btn.submit-btn {
+  margin-top: 1rem;
+}
+
+.bmi-form-container .fieldset.gender {
+  display: flex;
+  gap: 1rem;
+}
+
+.bmi-form-container .range-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.bmi-form-container .range-container input[type="range"] {
+  flex: 1;
+}
+
+.bmi-form-container .range-container .value-container {
+  min-width: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bmi-form-container .range-container .value-container .value {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.bmi-form-container .range-container .value-container .units {
+  font-size: 0.8rem;
+  color: gray;
+  font-weight: 400;
+}
