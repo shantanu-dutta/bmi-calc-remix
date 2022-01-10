@@ -1,13 +1,37 @@
 import RadioCardInput from "../RadioCardInput/RadioCardInput";
 import RangeInput from "../RangeInput/RangeInput";
 
-export default function BmiFormView() {
+type BmiFormData = {
+  height?: number;
+  weight?: number;
+  age?: number;
+  gender?: string;
+};
+
+export default function BmiFormView({
+  height,
+  weight,
+  gender,
+  age,
+}: BmiFormData) {
   return (
     <form method="post" className="bmi-form-container wrapper">
       <fieldset className="fieldset gender">
         <legend className="legend">Gender</legend>
-        <RadioCardInput id="card_male" name="gender" label="Male" />
-        <RadioCardInput id="card_female" name="gender" label="Female" />
+        <RadioCardInput
+          id="card_male"
+          name="gender"
+          value="male"
+          label="Male"
+          checked={gender === "male"}
+        />
+        <RadioCardInput
+          id="card_female"
+          name="gender"
+          value="female"
+          checked={gender === "female"}
+          label="Female"
+        />
       </fieldset>
 
       <fieldset className="fieldset age">
@@ -16,7 +40,7 @@ export default function BmiFormView() {
           name="age"
           min={0}
           max={100}
-          defaultValue={25}
+          defaultValue={age || 25}
           id="input_age"
           units="year"
         />
@@ -27,8 +51,8 @@ export default function BmiFormView() {
         <RangeInput
           name="height"
           min={0}
-          max={200}
-          defaultValue={120}
+          max={250}
+          defaultValue={height || 150}
           id="input_height"
           units="cm"
         />
@@ -40,7 +64,7 @@ export default function BmiFormView() {
           name="weight"
           min={0}
           max={150}
-          defaultValue={60}
+          defaultValue={weight || 50}
           id="input_weight"
           units="kg"
         />

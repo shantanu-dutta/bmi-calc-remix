@@ -61,6 +61,7 @@ body {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 0.5rem;
 }
 
 .header {
@@ -69,13 +70,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 0 0.5rem;
 }
 
 .main {
-  min-height: calc(100% - 60px);
   display: flex;
-  flex-direction: row;
+  flex-direction: column-reverse;
+  padding-bottom: 1rem;
+}
+
+.main .section {
+  width: 100%;
 }
 
 .blue-border {
@@ -86,7 +90,7 @@ body {
   border: 1px solid #aaa;
   background-color: #eee;
   padding: 0.8rem;
-  min-width: 8rem;
+  width: 100%;
   color: rgb(2, 28, 53);
   border-radius: 0.5rem;
   cursor: pointer;
@@ -102,9 +106,21 @@ input[type="range"] {
   cursor: pointer;
 }
 
-.radio-card {
+.card {
   height: 150px;
   width: 200px;
+  border: 1px solid rgba(2, 28, 53, 0.08);
+}
+
+.card.hoverable {
+  transition: box-shadow 250ms ease;
+}
+
+.card.hoverable:hover {
+  box-shadow: 7px 7px 15px rgba(2, 28, 53, 0.08);
+}
+
+.radio-card {
   position: relative;
 }
 
@@ -117,8 +133,6 @@ input[type="range"] {
   position: absolute;
   cursor: pointer;
   outline: none;
-  border: 1px solid rgba(2, 28, 53, 0.08);
-  transition: box-shadow 250ms ease;
 }
 
 /* uncomment to see radio input */
@@ -159,10 +173,6 @@ input[type="range"] {
   font-weight: 600;
   font-size: 24px;
   letter-spacing: 0.5px;
-}
-
-.radio-card input[type="radio"]:hover {
-  box-shadow: 7px 7px 15px rgba(2, 28, 53, 0.08);
 }
 
 .radio-card input[type="radio"]:checked {
@@ -227,4 +237,85 @@ input[type="range"] {
   font-size: 0.8rem;
   color: gray;
   font-weight: 400;
+}
+
+.section.bmi {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.section.bmi .bmi-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bmi-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.bmi-card .title,
+.bmi-card .status {
+  font-size: 1.2rem;
+}
+
+.bmi-card .title {
+  color: rgba(2, 28, 53, 0.5);
+}
+
+.bmi-card .bmi {
+  font-size: 4rem;
+  font-weight: 600;
+}
+
+.bmi-card .bmi.healthy,
+.bmi-card .status.healthy {
+  color: green;
+}
+
+.bmi-card .bmi.obese,
+.bmi-card .status.obese {
+  --text-opacity: 1;
+  color: rgba(239, 68, 68, var(--text-opacity));
+}
+
+.bmi-card .bmi.under-weight,
+.bmi-card .bmi.over-weight,
+.bmi-card .status.under-weight,
+.bmi-card .status.over-weight {
+  --text-opacity: 1;
+  color: rgba(245, 158, 11, var(--text-opacity));
+}
+
+.bmi-tips-card {
+  padding: 1rem;
+  max-width: 25rem;
+  height: auto;
+  text-align: center;
+}
+
+.bmi-tips-card .title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.bmi-tips-card .content {
+  color: rgba(2, 28, 53, 0.75);
+}
+
+@media screen and (min-width: 768.1px) {
+  .main {
+    flex-direction: row;
+  }
+
+  .btn {
+    width: auto;
+    min-width: 8rem;
+  }
 }

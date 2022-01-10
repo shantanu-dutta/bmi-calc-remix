@@ -1,15 +1,14 @@
-import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  json,
-} from "remix";
+import { Links, LiveReload, Meta, json, useActionData, Scripts } from "remix";
 import type { ActionFunction, MetaFunction, LinksFunction } from "remix";
 import stylesUrl from "~/styles/global.css";
 import Header from "./components/Header/Header";
+import BmiFormView from "~/components/BmiFormView/BmiFormView";
+import calculateBmi from "./utils/calculate-bmi.util";
+import BmiStatusCard from "./components/BmiStatusCard/BmiStatusCard";
+import type { BmiStatusType } from "./types/bmi-status.type";
+import calculateBmiStatus from "./utils/calculate-bmi-status.util";
+import BmiTips from "./components/BmiTips/BmiTips";
+import getBmiTips from "./utils/get-bmi-tips.util";
 
 export const links: LinksFunction = () => {
   return [
@@ -31,13 +30,42 @@ export const meta: MetaFunction = () => {
   return { title: "BMI Calculator" };
 };
 
+type AppActionData = {
+  bmi: number;
+  status: BmiStatusType;
+  tips: string;
+  formData: {
+    height: number;
+    weight: number;
+    gender: string;
+    age: number;
+  };
+};
+
 export const action: ActionFunction = async ({ request }) => {
   const body = await request.formData();
-  console.log(body);
-  return json(body);
+  const height = body.get("height");
+  const weight = body.get("weight");
+  const gender = body.get("gender");
+  const age = body.get("age");
+
+  if (!height || !weight || !age) {
+    return json("Invalid input", { status: 400 });
+  }
+  const bmi = calculateBmi(+weight, +height);
+  const status = calculateBmiStatus(bmi);
+  const tips = getBmiTips(status);
+
+  return json({
+    bmi,
+    status,
+    tips,
+    formData: { height: +height, weight: +weight, gender, age: +age },
+  } as AppActionData);
 };
 
 export default function App() {
+  const data = useActionData<AppActionData>();
   return (
     <html lang="en">
       <head>
@@ -51,9 +79,18 @@ export default function App() {
           <Header />
         </header>
         <main className="main wrapper">
-          <Outlet />
+          <div className="section form">
+            <BmiFormView {...data?.formData} />
+          </div>
+          <div className="section bmi">
+            {data && (
+              <div className="bmi-details">
+                <BmiStatusCard bmi={data.bmi} status={data.status} />
+                <BmiTips tips={data.tips} />
+              </div>
+            )}
+          </div>
         </main>
-        <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>

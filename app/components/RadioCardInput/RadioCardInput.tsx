@@ -4,10 +4,18 @@ export default function RadioCardInput({
   id,
   name,
   label,
+  value,
+  checked,
 }: FormInputPropsType) {
   return (
-    <div className="radio-card">
-      <input type="radio" name={name} id={id} />
+    <div className="card hoverable radio-card">
+      <input
+        type="radio"
+        name={name}
+        id={id}
+        value={value}
+        defaultChecked={checked}
+      />
       <label htmlFor={id}>
         <h5>{label}</h5>
       </label>
